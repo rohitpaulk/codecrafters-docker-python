@@ -1,3 +1,4 @@
+import ctypes
 import os
 import subprocess
 import sys
@@ -13,6 +14,12 @@ def main():
         # Copy executable into chroot
         os.makedirs(os.path.join(chroot_dir, os.path.dirname(command).strip("/")))
         shutil.copy(command, os.path.join(chroot_dir, command.strip("/")))
+
+        # Is there a cleaner way to do this?
+        unshare = 272
+        clone_newpid = 0x20000000
+        libc = ctypes.CDLL(None)
+        libc.syscall(unshare, clone_newpid)
 
         os.chroot(chroot_dir)
 
