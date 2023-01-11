@@ -7,10 +7,7 @@ def main():
     command = sys.argv[3]
     args = sys.argv[4:]
 
-    completed_process = subprocess.run([command, *args], capture_output=True)
-    sys.stdout.buffer.write(completed_process.stdout)
-    sys.stderr.buffer.write(completed_process.stderr)
-
+    completed_process = subprocess.run([command, *args])
     exit(completed_process.returncode)
 
 
