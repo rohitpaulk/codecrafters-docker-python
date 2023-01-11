@@ -11,6 +11,8 @@ def main():
     sys.stdout.buffer.write(completed_process.stdout)
     sys.stderr.buffer.write(completed_process.stderr)
 
+    exit(completed_process.returncode)
+
 
 if __name__ == "__main__":
     main()
